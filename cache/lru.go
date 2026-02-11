@@ -2,8 +2,9 @@ package cache
 
 import (
 	"context"
-	"fibox/logging"
 	"time"
+
+	"github.com/pengenjago/fibox/logging"
 
 	lru "github.com/hashicorp/golang-lru/v2"
 )

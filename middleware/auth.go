@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"fibox/jwt"
-	"fibox/response"
 	"strings"
+
+	"github.com/pengenjago/fibox/jwt"
+	"github.com/pengenjago/fibox/response"
 
 	"github.com/gofiber/fiber/v3"
 )

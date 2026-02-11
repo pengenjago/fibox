@@ -1,4 +1,4 @@
-module fibox
+module github.com/pengenjago/fibox
 
 go 1.25.5
 
