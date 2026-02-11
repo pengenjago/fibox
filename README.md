@@ -14,7 +14,7 @@ Fibox adalah library Go yang menyediakan utilitas untuk membangun aplikasi web d
 ## Instalasi
 
 ```bash
-go get github.com/username/fibox
+go get github.com/pengenjago/fibox
 ```
 
 ## Penggunaan
