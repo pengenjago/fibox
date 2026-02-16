@@ -4,9 +4,12 @@ import "github.com/gofiber/fiber/v3"
 
 // Response is the standard API response structure
 type Response struct {
-	Success bool        `json:"success"`
-	Data    interface{} `json:"data,omitempty"`
-	Message string      `json:"message,omitempty"`
+	Success   bool        `json:"success"`
+	Data      interface{} `json:"data,omitempty"`
+	Message   string      `json:"message,omitempty"`
+	Page      int         `json:"page,omitempty"`
+	Limit     int         `json:"limit,omitempty"`
+	TotalPage int         `json:"totalPage,omitempty"`
 }
 
 // Success sends a success response
@@ -15,6 +18,18 @@ func Success(c fiber.Ctx, message string, data interface{}) error {
 		Success: true,
 		Message: message,
 		Data:    data,
+	})
+}
+
+// SuccessWithPagination sends a success response with pagination info
+func SuccessWithPagination(c fiber.Ctx, message string, data interface{}, page, limit, totalPage int) error {
+	return c.Status(fiber.StatusOK).JSON(Response{
+		Success:   true,
+		Message:   message,
+		Data:      data,
+		Page:      page,
+		Limit:     limit,
+		TotalPage: totalPage,
 	})
 }
 
@@ -31,7 +46,7 @@ func Created(c fiber.Ctx, message string, data interface{}) error {
 func BadRequest(c fiber.Ctx, message string) error {
 	return c.Status(fiber.StatusBadRequest).JSON(Response{
 		Success: false,
-		Message:   message,
+		Message: message,
 	})
 }
 
