@@ -7,29 +7,22 @@ type Response struct {
 	Success bool        `json:"success"`
 	Data    interface{} `json:"data,omitempty"`
 	Message string      `json:"message,omitempty"`
-	Error   string      `json:"error,omitempty"`
 }
 
 // Success sends a success response
-func Success(c fiber.Ctx, data interface{}) error {
+func Success(c fiber.Ctx, message string, data interface{}) error {
 	return c.Status(fiber.StatusOK).JSON(Response{
 		Success: true,
+		Message: message,
 		Data:    data,
 	})
 }
 
-// SuccessWithMessage sends a success response with a message
-func SuccessWithMessage(c fiber.Ctx, message string) error {
-	return c.Status(fiber.StatusOK).JSON(Response{
-		Success: true,
-		Message: message,
-	})
-}
-
 // Created sends a created response
-func Created(c fiber.Ctx, data interface{}) error {
+func Created(c fiber.Ctx, message string, data interface{}) error {
 	return c.Status(fiber.StatusCreated).JSON(Response{
 		Success: true,
+		Message: message,
 		Data:    data,
 	})
 }
@@ -38,7 +31,7 @@ func Created(c fiber.Ctx, data interface{}) error {
 func BadRequest(c fiber.Ctx, message string) error {
 	return c.Status(fiber.StatusBadRequest).JSON(Response{
 		Success: false,
-		Error:   message,
+		Message:   message,
 	})
 }
 
@@ -46,7 +39,7 @@ func BadRequest(c fiber.Ctx, message string) error {
 func Unauthorized(c fiber.Ctx, message string) error {
 	return c.Status(fiber.StatusUnauthorized).JSON(Response{
 		Success: false,
-		Error:   message,
+		Message: message,
 	})
 }
 
@@ -54,7 +47,7 @@ func Unauthorized(c fiber.Ctx, message string) error {
 func Forbidden(c fiber.Ctx, message string) error {
 	return c.Status(fiber.StatusForbidden).JSON(Response{
 		Success: false,
-		Error:   message,
+		Message: message,
 	})
 }
 
@@ -62,23 +55,14 @@ func Forbidden(c fiber.Ctx, message string) error {
 func NotFound(c fiber.Ctx, message string) error {
 	return c.Status(fiber.StatusNotFound).JSON(Response{
 		Success: false,
-		Error:   message,
+		Message: message,
 	})
 }
 
 // InternalError sends an internal server error response
 func InternalError(c fiber.Ctx, message string) error {
 	return c.Status(fiber.StatusInternalServerError).JSON(Response{
+		Message: message,
 		Success: false,
-		Error:   message,
-	})
-}
-
-// ValidationError sends a validation error response
-func ValidationError(c fiber.Ctx, errors map[string]string) error {
-	return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-		"success": false,
-		"error":   "Validation failed",
-		"details": errors,
 	})
 }
